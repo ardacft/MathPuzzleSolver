@@ -8,6 +8,7 @@
 #   result of the operation must be a positive integer.
 
 import numpy as np
+from collections import Counter
 
 # to see all elements in the console, of a long, truncated list:
 # import sys
@@ -46,7 +47,6 @@ DomainStarter = np.array(DomainStarter)
 #    is achieved at the end of the fifth operation.
 # 4.
 firstDmns = np.array([])
-firstOps = np.array([])
 # counter = 0
 # at the end firstDmns array will have the same number of rows with the counter value plus one
 # plus one because python's index convention.......
@@ -67,7 +67,6 @@ for operator in Operators:
                 Domain = np.insert(Domain, 4, no3)
 
                 firstDmns = np.append(firstDmns, Domain)
-                firstOps = np.append(firstOps, operator)
 
                 Domain = np.insert(Domain, j, no2)
                 Domain = np.delete(Domain, 5)
@@ -78,7 +77,6 @@ for operator in Operators:
                 Domain = np.insert(Domain, 4, no3)
 
                 firstDmns = np.append(firstDmns, Domain)
-                firstOps = np.append(firstOps, operator)
 
                 Domain = np.insert(Domain, j, no2)
                 Domain = np.delete(Domain, 5)
@@ -100,7 +98,6 @@ firstDmnsIndices = np.unique(firstDmns, axis=0, return_index=True)
 firstDmns = firstDmns[firstDmnsIndices[1]]
 
 secondDmns = np.array([])
-secondOps = np.array([])
 for q in range(len(firstDmns)):
     a_Domain = firstDmns[q]
     for operator in Operators:
@@ -115,7 +112,6 @@ for q in range(len(firstDmns)):
                     a_Domain = np.insert(a_Domain, 3, no3)
 
                     secondDmns = np.append(secondDmns, a_Domain)
-                    secondOps = np.append(secondOps, operator)
 
                     a_Domain = np.insert(a_Domain, j, no2)
                     a_Domain = np.delete(a_Domain, 4)
@@ -124,7 +120,6 @@ for q in range(len(firstDmns)):
                     a_Domain = np.insert(a_Domain, 3, no3)
 
                     secondDmns = np.append(secondDmns, a_Domain)
-                    secondOps = np.append(secondOps, operator)
 
                     a_Domain = np.insert(a_Domain, j, no2)
                     a_Domain = np.delete(a_Domain, 4)
@@ -138,7 +133,6 @@ secondDmnsIndices = np.unique(secondDmns, axis=0, return_index=True)
 secondDmns = secondDmns[secondDmnsIndices[1]]
 
 thirdDmns = np.array([])
-thirdOps = np.array([])
 for q in range(len(secondDmns)):
     a_Domain = secondDmns[q]
     for operator in Operators:
@@ -153,7 +147,6 @@ for q in range(len(secondDmns)):
                     a_Domain = np.insert(a_Domain, 2, no3)
 
                     thirdDmns = np.append(thirdDmns, a_Domain)
-                    thirdOps = np.append(thirdOps, operator)
 
                     a_Domain = np.insert(a_Domain, j, no2)
                     a_Domain = np.delete(a_Domain, 3)
@@ -162,7 +155,6 @@ for q in range(len(secondDmns)):
                     a_Domain = np.insert(a_Domain, 2, no3)
 
                     thirdDmns = np.append(thirdDmns, a_Domain)
-                    thirdOps = np.append(thirdOps, operator)
 
                     a_Domain = np.insert(a_Domain, j, no2)
                     a_Domain = np.delete(a_Domain, 3)
@@ -178,7 +170,6 @@ thirdDmnsIndices = np.unique(thirdDmns, axis=0, return_index=True)
 thirdDmns = thirdDmns[thirdDmnsIndices[1]]
 
 fourthDmns = np.array([])
-fourthOps = np.array([])
 for q in range(len(thirdDmns)):
     a_Domain = thirdDmns[q]
     for operator in Operators:
@@ -193,7 +184,6 @@ for q in range(len(thirdDmns)):
                     a_Domain = np.insert(a_Domain, 1, no3)
 
                     fourthDmns = np.append(fourthDmns, a_Domain)
-                    fourthOps = np.append(fourthOps, operator)
 
                     a_Domain = np.insert(a_Domain, j, no2)
                     a_Domain = np.delete(a_Domain, 2)
@@ -202,7 +192,6 @@ for q in range(len(thirdDmns)):
                     a_Domain = np.insert(a_Domain, 1, no3)
 
                     fourthDmns = np.append(fourthDmns, a_Domain)
-                    fourthOps = np.append(fourthOps, operator)
 
                     a_Domain = np.insert(a_Domain, j, no2)
                     a_Domain = np.delete(a_Domain, 2)
@@ -219,7 +208,6 @@ fourthDmnsIndices = np.unique(fourthDmns, axis=0, return_index=True)
 fourthDmns = fourthDmns[fourthDmnsIndices[1]]
 
 fifthDmns = np.array([])
-fifthOps = np.array([])
 for q in range(len(fourthDmns)):
     a_Domain = fourthDmns[q]
     for operator in Operators:
@@ -234,7 +222,6 @@ for q in range(len(fourthDmns)):
                     a_Domain = np.insert(a_Domain, 0, no3)
 
                     fifthDmns = np.append(fifthDmns, a_Domain)
-                    fifthOps = np.append(fifthOps, operator)
 
                     a_Domain = np.insert(a_Domain, j, no2)
                     a_Domain = np.delete(a_Domain, 1)
@@ -243,7 +230,6 @@ for q in range(len(fourthDmns)):
                     a_Domain = np.insert(a_Domain, 0, no3)
 
                     fifthDmns = np.append(fifthDmns, a_Domain)
-                    fifthOps = np.append(fifthOps, operator)
 
                     a_Domain = np.insert(a_Domain, j, no2)
                     a_Domain = np.delete(a_Domain, 1)
@@ -261,10 +247,10 @@ fifthDmns = fifthDmns[fifthDmnsIndices[1]]
 # Up to this point, the goal is found. What's left is to find the operations done to find the goal and print them.
 
 index5 = np.where(fifthDmnsAll == Goal)[0][0]
-resultFifthStep = np.array([1, 'operator', 1, ' = ', Goal])
-resultFifthStep[1] = fifthOps[index5]
+op5 = ' '
 counter = 0
 index4 = 0
+op4 = ' '
 for q in range(len(fourthDmns)):
     a_Domain = fourthDmns[q]
     for operator in Operators:
@@ -277,12 +263,14 @@ for q in range(len(fourthDmns)):
                 if type(no2) == type(no3) and no3 > 1:
                     if counter == index5:
                         index4 = q
+                        op5 = operator
                     else:
                         pass
                     counter += 1
                 elif no3 == (no1 / no2) and no1 % no2 == 0 and no3 > 1:
                     if counter == index5:
                         index4 = q
+                        op5 = operator
                     else:
                         pass
                     counter += 1
@@ -293,17 +281,10 @@ resultDomain4 = tuple(fourthDmns[index4])
 index4 = np.where((fourthDmnsAll == resultDomain4).all(axis=1))
 index4 = index4[0][0]
 resultDomain4 = np.array(resultDomain4)
-resultFourthStep = np.array([1, 'operator', 1, '=', 1])
-resultFourthStep[4] = resultDomain4[1]
-resultFourthStep[1] = fourthOps[index4]
-if resultDomain4[0] >= resultDomain4[1]:
-    resultFifthStep[0] = resultDomain4[0]
-    resultFifthStep[2] = resultDomain4[1]
-else:
-    resultFifthStep[0] = resultDomain4[1]
-    resultFifthStep[2] = resultDomain4[0]
+print("resultDomain4 = ", resultDomain4)
 index3 = 0
 counter = 0
+op3 = ' '
 for q in range(len(thirdDmns)):
     a_Domain = thirdDmns[q]
     for operator in Operators:
@@ -316,12 +297,14 @@ for q in range(len(thirdDmns)):
                 if type(no2) == type(no3) and no3 > 1:
                     if counter == index4:
                         index3 = q
+                        op4 = operator
                     else:
                         pass
                     counter += 1
                 elif no3 == (no1 / no2) and no1 % no2 == 0 and no3 > 1:
                     if counter == index4:
                         index3 = q
+                        op4 = operator
                     else:
                         pass
                     counter += 1
@@ -332,21 +315,10 @@ resultDomain3 = tuple(thirdDmns[index3])
 index3 = np.where((thirdDmnsAll == resultDomain3).all(axis=1))
 index3 = index3[0][0]
 resultDomain3 = np.array(resultDomain3)
-resultThirdStep = np.array([1, 'operator', 1, '=', 1])
-resultThirdStep[4] = resultDomain3[2]
-resultThirdStep[1] = thirdOps[index3]
-intersect_3_4 = np.intersect1d(resultDomain3, resultDomain4)
-operands = resultDomain3
-for element in intersect_3_4:
-    operands = np.delete(operands, np.where(operands == element)[0][0])
-if operands[0] >= operands[1]:
-    resultFourthStep[0] = operands[0]
-    resultFourthStep[2] = operands[1]
-else:
-    resultFourthStep[0] = operands[1]
-    resultFourthStep[2] = operands[0]
+print("resultDomain3 = ", resultDomain3)
 index2 = 0
 counter = 0
+op2 = ' '
 for q in range(len(secondDmns)):
     a_Domain = secondDmns[q]
     for operator in Operators:
@@ -359,12 +331,14 @@ for q in range(len(secondDmns)):
                 if type(no2) == type(no3) and no3 > 1:
                     if counter == index3:
                         index2 = q
+                        op3 = operator
                     else:
                         pass
                     counter += 1
                 elif no3 == (no1 / no2) and no1 % no2 == 0 and no3 > 1:
                     if counter == index3:
                         index2 = q
+                        op3 = operator
                     else:
                         pass
                     counter += 1
@@ -375,21 +349,10 @@ resultDomain2 = tuple(secondDmns[index2])
 index2 = np.where((secondDmnsAll == resultDomain2).all(axis=1))
 index2 = index2[0][0]
 resultDomain2 = np.array(resultDomain2)
-resultSecondStep = np.array([1, 'operator', 1, '=', 1])
-resultSecondStep[4] = resultDomain2[3]
-resultSecondStep[1] = secondOps[index2]
-intersect_2_3 = np.intersect1d(resultDomain2, resultDomain3)
-operands = resultDomain2
-for element in intersect_2_3:
-    operands = np.delete(operands, np.where(operands == element)[0][0])
-if operands[0] >= operands[1]:
-    resultThirdStep[0] = operands[0]
-    resultThirdStep[2] = operands[1]
-else:
-    resultThirdStep[0] = operands[1]
-    resultThirdStep[2] = operands[0]
+print("resultDomain2 = ", resultDomain2)
 index1 = 0
 counter = 0
+op1 = ' '
 for q in range(len(firstDmns)):
     a_Domain = firstDmns[q]
     for operator in Operators:
@@ -402,12 +365,14 @@ for q in range(len(firstDmns)):
                 if type(no2) == type(no3) and no3 > 1:
                     if counter == index2:
                         index1 = q
+                        op2 = operator
                     else:
                         pass
                     counter += 1
                 elif no3 == (no1 / no2) and no1 % no2 == 0 and no3 > 1:
                     if counter == index2:
                         index1 = q
+                        op2 = operator
                     else:
                         pass
                     counter += 1
@@ -418,10 +383,88 @@ resultDomain1 = tuple(firstDmns[index1])
 index1 = np.where((firstDmnsAll == resultDomain1).all(axis=1))
 index1 = index1[0][0]
 resultDomain1 = np.array(resultDomain1)
+print("resultDomain1 = ", resultDomain1)
+Domain = DomainStarter
+counter = 0
+for operator in Operators:
+    for i in range(6):
+        no1 = Domain[i]
+        Domain = np.delete(Domain, i)
+        for j in range(5):
+            no2 = Domain[j]
+            no3 = Operators[operator](no1, no2)
+            if type(no2) == type(no3) and no3 > 1:
+                if counter == index1:
+                    op1 = operator
+                else:
+                    pass
+                counter += 1
+            elif no3 == (no1 / no2) and no1 % no2 == 0 and no3 > 1:
+                if counter == index1:
+                    op1 = operator
+                counter += 1
+            else:
+                pass
+        Domain = DomainStarter
+
+# Printing results
+
+resultFifthStep = np.array([1, 'operator', 1, ' = ', Goal])
+resultFourthStep = np.array([1, 'operator', 1, '=', 1])
+resultThirdStep = np.array([1, 'operator', 1, '=', 1])
+resultSecondStep = np.array([1, 'operator', 1, '=', 1])
 resultFirstStep = np.array([1, 'operator', 1, '=', 1])
+
+resultFifthStep[1] = op5
+resultFourthStep[1] = op4
+resultThirdStep[1] = op3
+resultSecondStep[1] = op2
+resultFirstStep[1] = op1
+
+resultFourthStep[4] = resultDomain4[1]
+resultThirdStep[4] = resultDomain3[2]
+resultSecondStep[4] = resultDomain2[3]
 resultFirstStep[4] = resultDomain1[4]
-resultFirstStep[1] = firstOps[index1]
-intersect_0_1 = np.intersect1d(resultDomain1, DomainStarter)
+
+if resultDomain4[0] >= resultDomain4[1]:
+    resultFifthStep[0] = resultDomain4[0]
+    resultFifthStep[2] = resultDomain4[1]
+else:
+    resultFifthStep[0] = resultDomain4[1]
+    resultFifthStep[2] = resultDomain4[0]
+intersect_3_4 = list((Counter(resultDomain3) & Counter(resultDomain4)).elements())
+intersect_3_4 = np.array(intersect_3_4)
+print('intersect_3_4 = ', intersect_3_4)
+operands = resultDomain3
+for element in intersect_3_4:
+    operands = np.delete(operands, np.where(operands == element)[0][0])
+if operands[0] >= operands[1]:
+    resultFourthStep[0] = operands[0]
+    resultFourthStep[2] = operands[1]
+else:
+    resultFourthStep[0] = operands[1]
+    resultFourthStep[2] = operands[0]
+
+
+
+intersect_2_3 = list((Counter(resultDomain2) & Counter(resultDomain3)).elements())
+intersect_2_3 = np.array(intersect_2_3)
+print('intersect_2_3 = ', intersect_2_3)
+operands = resultDomain2
+for element in intersect_2_3:
+    operands = np.delete(operands, np.where(operands == element)[0][0])
+if operands[0] >= operands[1]:
+    resultThirdStep[0] = operands[0]
+    resultThirdStep[2] = operands[1]
+else:
+    resultThirdStep[0] = operands[1]
+    resultThirdStep[2] = operands[0]
+
+
+
+intersect_0_1 = list((Counter(resultDomain1) & Counter(DomainStarter)).elements())
+intersect_0_1 = np.array(intersect_0_1)
+print("intersect_0_1 = ", intersect_0_1)
 operands = DomainStarter
 for element in intersect_0_1:
     operands = np.delete(operands, np.where(operands == element)[0][0])
@@ -431,7 +474,9 @@ if operands[0] >= operands[1]:
 else:
     resultFirstStep[0] = operands[1]
     resultFirstStep[2] = operands[0]
-intersect_1_2 = np.intersect1d(resultDomain1, resultDomain2)
+intersect_1_2 = list((Counter(resultDomain1) & Counter(resultDomain2)).elements())
+intersect_1_2 = np.array(intersect_1_2)
+print("intersect_1_2 = ", intersect_1_2)
 operands = resultDomain1
 for element in intersect_1_2:
     operands = np.delete(operands, np.where(operands == element)[0][0])
@@ -441,6 +486,8 @@ if operands[0] >= operands[1]:
 else:
     resultSecondStep[0] = operands[1]
     resultSecondStep[2] = operands[0]
+
+
 
 print(resultFirstStep[0], resultFirstStep[1], resultFirstStep[2], resultFirstStep[3], resultFirstStep[4], '\n')
 print(resultSecondStep[0], resultSecondStep[1], resultSecondStep[2], resultSecondStep[3], resultSecondStep[4], '\n')
